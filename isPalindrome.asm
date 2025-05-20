@@ -32,6 +32,7 @@ isPalindrome:
 
 .false_pal:
     xor eax, eax
+section .note.GNU-stack noalloc noexec nowrite progbits
     pop rbx
     ret
 
