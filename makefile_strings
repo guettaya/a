@@ -1,0 +1,33 @@
+# Compiler and flags
+CC = gcc
+ASM = nasm
+CFLAGS = -Wall -Wextra -g
+ASMFLAGS = -f elf64
+
+# Targets
+TARGET = string_test
+ASM_SOURCES = string_ops.asm
+C_SOURCE = test.c
+
+# Object files
+ASM_OBJECTS = $(ASM_SOURCES:.asm=.o)
+C_OBJECT = $(C_SOURCE:.c=.o)
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(ASM_OBJECTS) $(C_OBJECT)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.asm
+	$(ASM) $(ASMFLAGS) $< -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(TARGET) *.o
+
+run: $(TARGET)
+	./$(TARGET)
