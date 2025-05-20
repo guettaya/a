@@ -31,3 +31,4 @@ findMax:
 .return_zero:
     xor eax, eax
     ret
+section .note.GNU-stack noalloc noexec nowrite progbits
